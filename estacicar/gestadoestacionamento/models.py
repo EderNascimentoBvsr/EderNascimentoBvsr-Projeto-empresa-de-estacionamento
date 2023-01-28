@@ -12,4 +12,7 @@ class Marca(models.Model):
 
 class Veiculo(models.Model):
     marca = models.ForeignKey(Marca)
+    placa =  models.CharField(max_length=7)
+    cor =  models.CharField(max_length=5)
+    observacoes =models.TextField()
 
