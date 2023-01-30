@@ -11,7 +11,7 @@ class Marca(models.Model):
 
 
 class Veiculo(models.Model):
-    marca = models.ForeignKey(Marca)
+    marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
     placa =  models.CharField(max_length=7)
     cor =  models.CharField(max_length=5)
     observacoes =models.TextField()
