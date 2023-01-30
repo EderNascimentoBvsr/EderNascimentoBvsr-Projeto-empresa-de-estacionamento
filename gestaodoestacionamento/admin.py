@@ -13,6 +13,8 @@ class AdminClienteRotativo(admin.ModelAdmin):
         "saida",
         "valor_hora",
         "veiculo",
+        "tempo_decorrido",
+        "total",
         "pago"
         )
 
