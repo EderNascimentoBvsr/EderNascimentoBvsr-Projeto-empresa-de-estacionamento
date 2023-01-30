@@ -9,6 +9,9 @@ class Pessoa(models.Model):
 class Marca(models.Model):
     nome = models.CharField(max_length=50)
 
+    def __str__(self):
+        return nome
+
 class Veiculo(models.Model):
     marca = models.ForeignKey(Marca, on_delete= models.CASCADE)
     placa = models.CharField(max_length=6)
