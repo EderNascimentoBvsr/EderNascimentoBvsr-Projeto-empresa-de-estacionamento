@@ -1,4 +1,5 @@
 from django.db import models
+import math
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=50)
@@ -38,6 +39,13 @@ class ClienteRotativo(models.Model):
     valor_hora= models.DecimalField(max_digits=6, decimal_places=2)
     veiculo= models.ForeignKey(Veiculo, on_delete= models.CASCADE)
     pago = models.BooleanField(default=False)
+
+
+    def tempo_decorrido(self):        
+        return math.ceil ((self.entrada-self.saida).total_seconds()/3600)
+
+    def horas(self):
+        self.valor_hora * self.tempo_decorrido 
 
     def __str__(self):
         return self.veiculo.placa
