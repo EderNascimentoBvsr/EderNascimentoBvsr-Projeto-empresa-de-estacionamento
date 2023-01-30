@@ -25,7 +25,12 @@ class Veiculo(models.Model):
     def __str__(self):
         return self.marca.nome + ' - ' + self.placa
 
+class Parametros(models.Model):
+    valor_hora = models.DecimalField(max_digits=6, decimal_places=2)
+    valor_mes = models.DecimalField(max_digits=6, decimal_places=2)
 
+    def __str__(self):
+        return "Preficicação do serviço"
 
 
 
