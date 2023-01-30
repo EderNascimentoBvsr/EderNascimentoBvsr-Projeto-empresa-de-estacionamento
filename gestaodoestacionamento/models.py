@@ -23,10 +23,10 @@ class Veiculo(models.Model):
     observacao = models.TextField()
 
     def __str__(self):
-        return self.marca + " - " + self.placa
+        return self.marca.nome + ' - ' + self.placa
 
 
 
 
 
-# Create your models here.
+
