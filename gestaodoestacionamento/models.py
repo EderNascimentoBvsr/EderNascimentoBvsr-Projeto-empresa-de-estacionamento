@@ -32,6 +32,17 @@ class Parametros(models.Model):
     def __str__(self):
         return "Preficicação do serviço"
 
+class ClienteRotativo(models.Model):    
+    entrada= models.DateTimeField(auto_now=False)
+    saida = models.DateTimeField(auto_now=False, null=True, blank=True)
+    valor_hora= models.DecimalField(max_digits=6, decimal_places=2)
+    veiculo= models.ForeignKey(Veiculo, on_delete= models.CASCADE)
+    pago = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.veiculo.placa
+
+
 
 
 
