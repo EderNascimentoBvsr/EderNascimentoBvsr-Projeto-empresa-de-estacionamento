@@ -36,7 +36,7 @@ class Parametros(models.Model):
 class ClienteRotativo(models.Model):    
     entrada= models.DateTimeField(auto_now=False)
     saida = models.DateTimeField(auto_now=False, null=True, blank=True)
-    valor_hora= models.DecimalField(max_digits=6, decimal_places=2)
+    valor_hora= models.ForeignKey(Parametros, on_delete=models.CASCADE)
     veiculo= models.ForeignKey(Veiculo, on_delete= models.CASCADE)
     pago = models.BooleanField(default=False)
 
@@ -45,7 +45,7 @@ class ClienteRotativo(models.Model):
         return math.ceil ((self.entrada-self.saida).total_seconds()/3600)
 
     def total(self):
-        self.valor_hora * self.tempo_decorrido 
+        self.valor_hora.valor_hora * self.tempo_decorrido 
 
     def __str__(self):
         return self.veiculo.placa
