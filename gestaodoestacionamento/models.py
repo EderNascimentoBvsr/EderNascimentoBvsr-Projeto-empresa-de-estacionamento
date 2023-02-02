@@ -45,7 +45,19 @@ class ClienteRotativo(models.Model):
         return math.ceil((self.saida - self.entrada).total_seconds()/3600)
 
     def total(self):
-        return self.valor_hora * self.tempo_decorrido() 
+        minutos = self.tempo_decorrido() * 60
+
+        if minutos < 30:
+            return self.valor_hora/2
+        
+        elif minutos == 30:
+            return self.valor_hora
+
+        elif minutos >30 and minutos<61:
+            return self.valor_hora
+
+        else:
+            return self.valor_hora * self.tempo_decorrido() 
 
     def __str__(self):
         return self.veiculo.placa
