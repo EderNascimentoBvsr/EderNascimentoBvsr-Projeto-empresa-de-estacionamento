@@ -42,12 +42,19 @@ class ClienteRotativo(models.Model):
 
 
     def tempo_decorrido(self):        
-        return math.ceil((self.saida - self.entrada).total_seconds()/3600)
+        return round ((self.saida - self.entrada).total_seconds()/3600,2)
+
+    def contador_minutos(self):
+        return math.ceil ((self.saida - self.entrada).total_seconds()/60)
 
     def total(self):
-        minutos = self.tempo_decorrido() * 60
+        valor_minuto = self.valor_hora/60
+        minutos = self.contador_minutos() 
 
-        if minutos < 30:
+        if minutos < 0000.1:
+            return "Cliente inativo"
+        
+        elif minutos < 30 and minutos >0:
             return self.valor_hora/2
         
         elif minutos == 30:
@@ -55,12 +62,14 @@ class ClienteRotativo(models.Model):
 
         elif minutos >30 and minutos<61:
             return self.valor_hora
-
+        
         else:
-            return self.valor_hora * self.tempo_decorrido() 
+            if minutos >60:
+                return valor_minuto * minutos
 
     def __str__(self):
         return self.veiculo.placa
+
 
 
 
