@@ -43,7 +43,7 @@ class ClienteRotativo(models.Model):
 
     def tempo_decorrido(self): 
 
-        total_segundos = (self.saida - self.entrada).total_seconds()
+        total_segundos = abs(self.saida - self.entrada).total_seconds()
         dias = round(total_segundos/86400)
         resto_divisao1 = total_segundos%86400
         horas = round(resto_divisao1 / 3600)
@@ -57,7 +57,7 @@ class ClienteRotativo(models.Model):
         valor_minuto = self.valor_hora/60
         minutos = math.ceil ((self.saida - self.entrada).total_seconds()/60)
 
-        if minutos < 0000.1:
+        if minutos > 0:
             return "Cliente inativo"
         
         elif minutos < 30 and minutos >0:
