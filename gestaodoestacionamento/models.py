@@ -41,15 +41,18 @@ class ClienteRotativo(models.Model):
     pago = models.BooleanField(default=False)
 
 
-    def tempo_decorrido(self):        
-        return round ((self.saida - self.entrada).total_seconds()/3600,2)
+    def tempo_decorrido(self): 
 
-    def contador_minutos(self):
-        return math.ceil ((self.saida - self.entrada).total_seconds()/60)
+        total_segundos = (self.saida - self.entrada).total_seconds()
+        dias = round(total_segundos/86400)
+        horas = round(dias//3600)        
+        minutos = round(horas//60)                         
+        return f"*{dias} Dias - *{horas} horas - *{minutos} minutos"
 
+    
     def total(self):
         valor_minuto = self.valor_hora/60
-        minutos = self.contador_minutos() 
+        minutos = math.ceil ((self.saida - self.entrada).total_seconds()/60)
 
         if minutos < 0000.1:
             return "Cliente inativo"
