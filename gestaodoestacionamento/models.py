@@ -44,9 +44,11 @@ class ClienteRotativo(models.Model):
     def tempo_decorrido(self): 
 
         total_segundos = (self.saida - self.entrada).total_seconds()
-        dias = round(total_segundos/86400)
-        horas = round(dias//3600)        
-        minutos = round(horas//60)                         
+        dias = round(total_segundos//86400)
+        num = dias
+        horas = round(num % 3600)
+        num2 = horas        
+        minutos = round(num2 % 60)                         
         return f"*{dias} Dias - *{horas} horas - *{minutos} minutos"
 
     
